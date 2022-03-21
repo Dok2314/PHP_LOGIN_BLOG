@@ -1,0 +1,35 @@
+<?php
+include "core.php";
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <?php include "application/includes/assets.php"; ?>
+</head>
+<body>
+<!--Header ---------------------------------------------------->
+<?php include "application/includes/header.php"; ?>
+<!--Content ----------------------------------------------------------------------------->
+
+<div class="container">
+    <div class="row">
+         <div class="col-md-8">
+              Posts
+         </div>
+        <div class="col-md-4">
+            Categories
+        </div>
+    </div>
+</div>
+
+
+<!--Footer ----------------------------------------------------------------------------->
+<?php include "application/includes/footer.php"; ?>
+</body>
+</html>
