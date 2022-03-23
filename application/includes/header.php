@@ -18,13 +18,14 @@
             </form>
 
             <div class="text-end">
-                <a href="login.php"><button type="button" class="btn btn-outline-light me-2">Вход</button></a>
                 <?php if(isset($_SESSION['name'])): ?>
+                    <a href="logout.php"><button type="button" class="btn btn-outline-light me-2">Выйти</button></a>
                     <a href="profile.php"><button type="button" class="btn btn-warning">Мой Кабинет</button></a>
                     <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
                         <a href="admin.php"><button type="button" class="btn btn-warning">Админка</button></a>
                     <?php endif;?>
                 <?php else: ?>
+                    <a href="login.php"><button type="button" class="btn btn-outline-light me-2">Вход</button></a>
                     <a href="register.php"><button type="button" class="btn btn-warning">Регистрация</button></a>
                 <?php endif; ?>
             </div>

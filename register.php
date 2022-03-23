@@ -15,7 +15,7 @@
 <?php include "application/includes/header.php"; ?>
 
 <!-- Content   -->
-
+    <h1 class="alert alert-info">Регистрация</h1>
     <div class="container">
         <form action="register.php" method="POST" class="form-reg">
             <div class="err">
