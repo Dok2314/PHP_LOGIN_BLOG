@@ -1,5 +1,6 @@
 <?php
 include "core.php";
+checkAuth();
 ?>
 
 <!doctype html>
@@ -31,9 +32,9 @@ include "core.php";
             </a>
         </li>
         <li>
-            <a class='expandable' href='#' title='APIs'>
+            <a class='expandable' href='CRUD/articles/create.php' title='APIs'>
                 <span class='glyphicon glyphicon-wrench collapsed-element'></span>
-                <span class='expanded-element'>Статьи</span>
+                <span class='expanded-element'>Создать Статью</span>
             </a>
         </li>
         <li>

@@ -1,5 +1,6 @@
 <?php
 include "core.php";
+checkAuth();
 ?>
 <!doctype html>
 <html lang="en">
