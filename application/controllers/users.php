@@ -4,7 +4,9 @@ use application\connect\Database;
 include "core.php";
 
 $db = new Database();
-$errMess = '';
+$errMess  = '';
+$oldName  = '';
+$oldEmail = '';
 
 function registerUser($user)
 {
@@ -25,6 +27,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-user']))
     $email    = trim($_POST['email']);
     $passF    = trim($_POST['pass-first']);
     $passS    = trim($_POST['pass-second']);
+    $oldName  = $username;
+    $oldEmail = $email;
 
     if(empty($username) || empty($email) || empty($passF))
     {
@@ -70,6 +74,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login-user']))
 {
     $email    = trim($_POST['email']);
     $password = $_POST['pass'];
+    $oldEmail = $email;
 
     if(empty($email) || empty($password)){
         $errMess = 'Не все поля заполнены!';

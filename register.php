@@ -25,11 +25,11 @@
             </div>
             <div class="form-group">
                 <label for="name">Ваше Имя:</label>
-                <input type="text" name="name" id="name" class="form-control">
+                <input type="text" name="name" id="name" class="form-control" value="<?=$oldName;?>">
             </div>
             <div class="form-group">
                 <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" class="form-control">
+                <input type="email" name="email" id="email" class="form-control" value="<?=$oldEmail;?>">
             </div>
             <div class="form-group">
                 <label for="pass-first">Пароль</label>
