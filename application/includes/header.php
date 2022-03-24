@@ -19,7 +19,7 @@
 
             <div class="text-end">
                 <?php if(isset($_SESSION['name'])): ?>
-                    <a href="logout.php"><button type="button" class="btn btn-outline-light me-2">Выйти</button></a>
+                    <a href="/logout.php"><button type="button" class="btn btn-outline-light me-2">Выйти</button></a>
                     <a href="profile.php"><button type="button" class="btn btn-warning">Мой Кабинет</button></a>
                     <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
                         <a href="admin.php"><button type="button" class="btn btn-warning">Админка</button></a>

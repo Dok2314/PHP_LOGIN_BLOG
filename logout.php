@@ -6,3 +6,4 @@ unset($_SESSION['name']);
 unset($_SESSION['is_admin']);
 
 header('Location: ' . '/');
+
