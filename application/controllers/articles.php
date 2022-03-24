@@ -1,14 +1,53 @@
 <?php
+use application\connect\Database;
+
+$db = new Database();
+$errMess   = '';
+$oldTitle  = '';
+$oldPost   = '';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-article']))
 {
-    $user_id   = $_POST['userId'];
+    $user_id   = $_SESSION['id'];
     $title     = trim($_POST['title']);
     $post      = trim($_POST['post']);
     $category  = $_POST['category'];
-    $isApprove = $_POST['appr'];
+    $img       = $_FILES['img'] ?? null;
+    $isApproved = $_POST['appr'];
     $slug      = slug($title);
-    dd($slug);
+
+    $oldTitle  = $title;
+    $oldPost   = $post;
+
+    if(empty($title) || empty($post)){
+        $errMess = 'Не все поля заполнены!';
+    }elseif(mb_strlen($title) < 2){
+        $errMess = 'Поле Название должно содержать больше 2 символов!';
+    }elseif(mb_strlen($post) < 5){
+        $errMess = 'Поле Статья должно содержать больше 5 символов!';
+    }elseif(empty($img['tmp_name'])){
+        $errMess = 'Вы не загрузили картинку!';
+    }elseif(isset($img)){
+        if($img['size'] > 1024 * 10 * 10){
+            $errMess = 'Файл должен быть меньше 10Мб!';
+        }
+    }
+
+    if (empty($errMess)) {
+        $filename = uniqid() . '-' . $img['name'];
+        move_uploaded_file($img['tmp_name'], APP_ROOT . 'uploads/' . $filename);
+        $article = [
+            'user_id'     => $user_id,
+            'category_id' => $category,
+            'title'       => $title,
+            'slug'        => $slug,
+            'post'        => $post,
+            'img'         => $filename,
+            'approved'    => $isApproved
+        ];
+        $db->insert('posts', $article);
+        header('Location: /article.php?slug=' . $slug);
+    }
 }
 
 function slug($title)

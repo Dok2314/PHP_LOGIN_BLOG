@@ -1,6 +1,9 @@
 <?php
 include "../../core.php";
 include "../../application/controllers/articles.php";
+use application\connect\Database;
+$db = new Database();
+$categories = $db->selectAll('categories');
 ?>
 <!doctype html>
 <html lang="en">
@@ -11,32 +14,37 @@ include "../../application/controllers/articles.php";
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Добавление Статьи</title>
     <?php include "../../application/includes/assets.php"; ?>
+    <link rel="stylesheet" href="../../application/assets/css/style.css">
 </head>
 <body>
 <!--Header ---------------------------------------------------->
 <?php include "../../application/includes/header.php"; ?>
 
 <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
-    <form action="create.php" method="POST" class="form-group">
-        <input type="hidden" name="userId" value="<?=$_SESSION['id']?>">
-        <div class="form-group">
+    <form action="create.php" method="POST" class="form-group" enctype="multipart/form-data">
+        <div class="err">
+            <?php if($errMess): ?>
+                <?php echo $errMess; ?>
+            <?php endif; ?>
+        </div>
+        <div class="form-group pb-4">
             <label for="title">Название Статьи</label>
-            <input type="text" name="title" id="title" class="form-control">
+            <input type="text" name="title" id="title" class="form-control" value="<?=$oldTitle;?>">
         </div>
-        <div class="form-group">
+        <div class="form-group pb-4">
             <label for="post">Статья</label>
-            <textarea name="post" id="post" cols="30" rows="10" class="form-control"></textarea>
+            <textarea name="post" id="post" cols="30" rows="10" class="form-control"><?=$oldPost;?></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group pb-4">
             <label for="img">Фото</label>
             <input type="file" name="img" id="img" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="form-group pb-4">
             <label for="category">Категория</label>
             <select name="category" id="category" class="form-control">
-                <option value="1">Политика</option>
-                <option value="2">Крипта</option>
-                <option value="3">Машины</option>
+                <?php foreach($categories as $category): ?>
+                <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="form-group">

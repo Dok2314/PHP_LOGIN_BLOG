@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 include "vendor/autoload.php";
 session_start();
 
+define('APP_ROOT', __DIR__ . '/');
+
 function checkAuth() {
     if (!isset($_SESSION['id'])) {
         header('Location: /');
