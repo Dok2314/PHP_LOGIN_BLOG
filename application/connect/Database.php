@@ -126,4 +126,27 @@ class Database
         $query->execute();
         $this->dbCheckError($query);
     }
+
+    public function paginate($table, $recordsPerPage)
+    {
+        $page = $_GET['page'] ?? 1;
+        $offset = $recordsPerPage * ($page - 1);
+
+        $sql = "SELECT * FROM $table
+                LIMIT $recordsPerPage OFFSET $offset";
+        $query = $this->connect->prepare($sql);
+        $query->execute();
+        $this->dbCheckError($query);
+
+        return $query->fetchAll();
+    }
 }
+/*
+ * $limit = 10; //кол-во записей на странице пагинации
+ * $page = $_GET['page'] ?? 1; //<a href="articles.php?page=1
+ * $offset = $limit * ($page - 1);
+ *
+ * SELECT * FROM articles
+ * LIMIT 10
+ * OFFSET 20
+ */
