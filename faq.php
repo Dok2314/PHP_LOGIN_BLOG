@@ -1,3 +1,6 @@
+<?php
+include "core.php";
+?>
 <!doctype html>
 <html lang="en">
 <head>
