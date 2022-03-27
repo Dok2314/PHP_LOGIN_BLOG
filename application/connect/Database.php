@@ -61,9 +61,9 @@ class Database
     {
         $bindings = [];
         $sql = "SELECT * FROM $table";
-        if(!empty($params)){
+        if (!empty($params)) {
             $whereSql = [];
-            foreach($params AS $key => $value) {
+            foreach ($params as $key => $value) {
                 $bindings[] = $value;
                 $whereSql[] = "`$key` = ?";
             }
@@ -80,9 +80,9 @@ class Database
     {
         $bindings = [];
         $sql = "SELECT * FROM $table";
-        if(!empty($params)){
+        if (!empty($params)) {
             $whereSql = [];
-            foreach($params AS $key => $value) {
+            foreach ($params as $key => $value) {
                 $bindings[] = $value;
                 $whereSql[] = "`$key` = ?";
             }
@@ -100,10 +100,10 @@ class Database
         $i = 0;
         $str = '';
         foreach ($params as $key => $value) {
-            if($i === 0){
+            if ($i === 0) {
                 $str = $str . $key . " = '" . $value . "'";
-            }else{
-                $str = $str . ", " . $key  . " = '" . $value . "'";
+            } else {
+                $str = $str . ", " . $key . " = '" . $value . "'";
             }
             $i++;
         }
@@ -127,26 +127,30 @@ class Database
         $this->dbCheckError($query);
     }
 
-    public function paginate($table, $recordsPerPage)
+    public function totalPages($table, $recordsPerPage)
     {
-        $page = $_GET['page'] ?? 1;
-        $offset = $recordsPerPage * ($page - 1);
-
-        $sql = "SELECT * FROM $table
-                LIMIT $recordsPerPage OFFSET $offset";
+        $sql = "SELECT COUNT(*) FROM $table";
         $query = $this->connect->prepare($sql);
         $query->execute();
         $this->dbCheckError($query);
+        $total_results = $query->fetchColumn();
+        $total_pages = ceil($total_results / $recordsPerPage);
 
-        return $query->fetchAll();
+        return $total_pages;
+    }
+
+    public function paginate($table, $recordsPerPage)
+    {
+        $page = $_GET['page'] ?? 1;
+        $offset = ($page - 1) * $recordsPerPage;
+
+        $sql = "SELECT * FROM $table ORDER BY id DESC LIMIT $recordsPerPage
+                OFFSET $offset";
+        $query = $this->connect->prepare($sql);
+        $query->execute();
+        $this->dbCheckError($query);
+        $articles = $query->fetchAll();
+
+        return $articles;
     }
 }
-/*
- * $limit = 10; //кол-во записей на странице пагинации
- * $page = $_GET['page'] ?? 1; //<a href="articles.php?page=1
- * $offset = $limit * ($page - 1);
- *
- * SELECT * FROM articles
- * LIMIT 10
- * OFFSET 20
- */
