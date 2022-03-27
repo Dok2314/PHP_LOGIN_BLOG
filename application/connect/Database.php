@@ -125,6 +125,8 @@ class Database
         $query = $this->connect->prepare($sql);
         $query->execute();
         $this->dbCheckError($query);
+
+        header('Location: /CRUD/articles/articles.php');
     }
 
     public function totalPages($table, $recordsPerPage)

@@ -15,6 +15,7 @@ $article = $db->selectOne('posts', ['slug' => $slug]);
     <title><?php echo $article['title'];?></title>
 </head>
 <body>
+
 <img src="/uploads/<?php echo $article['img'];?>" alt="">
 </body>
 </html>
