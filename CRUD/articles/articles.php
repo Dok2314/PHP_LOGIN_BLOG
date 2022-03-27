@@ -4,7 +4,11 @@ use application\connect\Database;
 $db = new Database();
 $articles = $db->paginate('posts', 2);
 $total_pages = $db->totalPages('posts', 2);
-
+if(isset($_GET['article_id']))
+{
+    $articleId = $_GET['article_id'];
+    $db->delete('posts', $articleId);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,7 +44,7 @@ $total_pages = $db->totalPages('posts', 2);
             <td><?php echo $article['title'];?></td>
             <td><?php echo $article['post'];?></td>
             <td><img src="/uploads/<?php echo $article['img'];?>" width="300px" height="200px"></td>
-            <td><button class="btn btn-danger">Удалить</button></td>
+            <td><a href="?article_id=<?php echo $article['id']; ?>"><button class="btn btn-danger">Удалить</button></a></td>
         </tr>
         <?php endforeach; ?>
         </tbody>
