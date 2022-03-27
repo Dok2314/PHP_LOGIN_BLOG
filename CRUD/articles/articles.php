@@ -2,8 +2,9 @@
 include "../../core.php";
 use application\connect\Database;
 $db = new Database();
-//$articles = $db->selectAll('posts');
-$articles = $db->paginate('posts', 1);
+$articles = $db->paginate('posts', 2);
+$total_pages = $db->totalPages('posts', 2);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -44,17 +45,15 @@ $articles = $db->paginate('posts', 1);
         <?php endforeach; ?>
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-<!--            Если page != 1 то - 1 если 1 то все disabled-->
-
-            <li class="page-item"><a class="page-link" href="articles.php?page=<?php echo $_GET['page'] === 1 ?  $_GET['page'] - 1 : $_GET['page'] = 1;?>">Предыдущая</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="articles.php?page=<?php echo $_GET['page'] + 1; ?>">Следуйщая</a></li>
-        </ul>
-    </nav>
+    <ul class="pagination">
+        <?php for ($page = 1; $page <= $total_pages ; $page++):?>
+            <li class="page-item">
+                <a class="page-link" href="<?php echo "articles.php?page=$page"; ?>">
+                    <?php  echo $page; ?>
+                </a>
+            </li>
+        <?php endfor; ?>
+    </ul>
 </div>
 
 <!--Header ---------------------------------------------------->
