@@ -8,6 +8,7 @@ if(isset($_GET['article_id']))
 {
     $articleId = $_GET['article_id'];
     $db->delete('posts', $articleId);
+    header('Location: /CRUD/articles/articles.php');
 }
 ?>
 <!doctype html>
@@ -51,7 +52,7 @@ if(isset($_GET['article_id']))
     </table>
     <ul class="pagination">
         <?php for ($page = 1; $page <= $total_pages ; $page++):?>
-            <li class="page-item">
+            <li class="page-item <?php echo $page == ($_GET['page'] ?? 1) ? 'active' : '' ?>">
                 <a class="page-link" href="<?php echo "articles.php?page=$page"; ?>">
                     <?php  echo $page; ?>
                 </a>

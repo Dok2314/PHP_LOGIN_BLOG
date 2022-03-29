@@ -38,9 +38,9 @@ checkAuth();
             </a>
         </li>
         <li>
-            <a class='expandable' href='#' title='Settings'>
-                <span class='glyphicon glyphicon-cog collapsed-element'></span>
-                <span class='expanded-element'>Права</span>
+            <a class='expandable' href='CRUD/categories/create.php' title='APIs'>
+                <span class='glyphicon glyphicon-wrench collapsed-element'></span>
+                <span class='expanded-element'>Создать Категорию</span>
             </a>
         </li>
         <li>

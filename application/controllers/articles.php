@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-article']))
     }elseif(empty($img['tmp_name'])){
         $errMess = 'Вы не загрузили картинку!';
     }elseif(isset($img)){
-        if($img['size'] > 1024 * 10 * 10){
+        if($img['size'] > 1024 * 1024 * 10){
             $errMess = 'Файл должен быть меньше 10Мб!';
         }
     }
