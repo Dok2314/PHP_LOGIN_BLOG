@@ -125,8 +125,6 @@ class Database
         $query = $this->connect->prepare($sql);
         $query->execute();
         $this->dbCheckError($query);
-
-        header('Location: /CRUD/articles/articles.php');
     }
 
     public function totalPages($table, $recordsPerPage)
@@ -146,7 +144,9 @@ class Database
         $page = $_GET['page'] ?? 1;
         $offset = ($page - 1) * $recordsPerPage;
 
-        $sql = "SELECT * FROM $table ORDER BY id DESC LIMIT $recordsPerPage
+        $sql = "SELECT * FROM $table
+                ORDER BY id DESC
+                LIMIT $recordsPerPage
                 OFFSET $offset";
         $query = $this->connect->prepare($sql);
         $query->execute();
