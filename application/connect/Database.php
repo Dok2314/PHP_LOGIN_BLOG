@@ -155,4 +155,33 @@ class Database
 
         return $articles;
     }
+
+    public function approvedPosts($table, $isAprove)
+    {
+        $res = $this->selectAll('posts');
+        $aprovedPosts = [];
+        foreach ($res as $post) {
+            if($post['approved'] == 1){
+                $aprovedPosts[] = $post;
+            }
+        }
+
+        return $aprovedPosts;
+    }
+
+    public function search($query)
+    {
+        $searchQ = trim($query);
+        $searchQ = htmlspecialchars($query);
+
+        $sql = "SELECT * FROM posts WHERE title LIKE '%$searchQ%'";
+        $query = $this->connect->prepare($sql);
+        $query->execute();
+        if($query->rowCount() != 0){
+            $articles = $query->fetchAll();
+            return $articles;
+        }else {
+            echo 'Не найдено записей с названием: ' . '<b>'.$searchQ.'</b>';
+        }
+    }
 }
