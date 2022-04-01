@@ -1,5 +1,6 @@
 <?php
 include "../../core.php";
+checkAuth();
 use application\connect\Database;
 $db = new Database();
 $articles = $db->paginate('posts', 2);

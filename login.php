@@ -1,4 +1,6 @@
-<?php include "application/controllers/users.php";?>
+<?php
+    include "application/controllers/users.php";
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@
         </div>
         <div class="form-group">
             <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email" class="form-control" value="<?=$oldEmail;?>">
+            <input type="email" name="email" placeholder="name@example.com" id="email" class="form-control" value="<?=$oldEmail;?>">
         </div>
         <div class="form-group">
             <label for="pass">Пароль</label>
@@ -33,6 +35,21 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary" name="login-user">Войти</button>
+    </form>
+    <br>
+    <hr>
+    <h1 style="text-align: center">Востановление Пароля</h1>
+    <form action="" class="row g-3" method="post">
+        <div class="col-md-6 offset-md-3">
+            <div class="form-floating mb-3">
+                <input type="text" name="email" class="form-control" id="email"
+                placeholder="name@example.com">
+                <label for="email" class="required">E-mail</label>
+            </div>
+        </div>
+        <div class="col-md-6 offset-md-3">
+            <button type="submit" name="recover" class="btn btn-danger">Отправить</button>
+        </div>
     </form>
     <br>
 </div>
