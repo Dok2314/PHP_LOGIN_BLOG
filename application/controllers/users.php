@@ -1,7 +1,14 @@
 <?php
 
 use application\connect\Database;
+use application\connect\Password;
 include "core.php";
+
+
+$pass = new Password();
+//dd($pass->recoverPass('dok@gmail.com'));
+
+
 
 $db = new Database();
 $errMess  = '';
